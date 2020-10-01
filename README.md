@@ -26,8 +26,8 @@ characters and numbers should be included, as that is a requirement by many orga
 
 ## Python
 This project is written in [Python](https://www.python.org/), so you'll need to install
-a python environment. The package depends on the /requests/ package, which is available 
-to install using /pip/.
+a python environment. The package depends on the _requests_ package, which is available 
+to install using _pip.
 ```
 $ python3 -m pip install requests
 ```
