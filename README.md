@@ -39,3 +39,7 @@ folder.
 # License
 Pword is licensed under the GNU General Public License v 3.0 
 (see [LICENSE.txt](license.txt) for details).
+
+The source code allows for downloading word lists from https://github.com/dwyl/english-words,
+which in turn sourced the word list from https://web.archive.org/web/20131118073324/http://www.infochimps.com/datasets/word-list-350000-simple-english-words-excel-readable (archived). Copyright to the word list
+belongs to them.
