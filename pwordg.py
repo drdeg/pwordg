@@ -133,11 +133,16 @@ class PasswordGenerator:
 
         return password
 
+wordListUrls = {
+    'swedish': 'https://github.com/almgru/svenska-ord.txt/raw/master/svenska-ord.txt',
+    'english': 'https://github.com/dwyl/english-words/raw/master/words_alpha.txt',
+}
 
 def downloadWordList(url = "", fileName = 'words_alpha.txt'):
     """ Downloads a word list from an URL """
     req = requests.get(url, allow_redirects = True)
     open(fileName,'wb').write(req.content)
+
 
 def main():
     """ Main entry point for the program """
@@ -154,15 +159,17 @@ def main():
     parser.add_argument('-r', '--reduced', help='Use reduced symbol set: '+PasswordGenerator.reducedSymbols, action='store_true')
     parser.add_argument('--min-word-len', help='Shortest word length', type=int, default=2)
     parser.add_argument('--max-word-len', help='Longest word length', type=int, default=5)
-    parser.add_argument('--wordlist', help='File containing words', type=str, default='words_alpha.txt')
-    parser.add_argument('--download', help='Download default word file', action='store_true')
+    parser.add_argument('--wordlist', help='File containing words', type=str, default='words.txt')
+    parser.add_argument('--download', help='Download default word file', nargs='?', type=str, const='english', default=None)
 
     args = parser.parse_args()
 
     assert args.min_word_len <= args.max_word_len
 
     if args.download:
-        downloadWordList('https://github.com/dwyl/english-words/raw/master/words_alpha.txt')
+        # Swedish list of words: https://github.com/almgru/svenska-ord.txt/raw/master/svenska-ord.txt
+        print(f"Downloading {args.download} from {wordListUrls[args.download]}")
+        downloadWordList(wordListUrls[args.download], fileName = args.wordlist)
 
     pwgen = PasswordGenerator(args.reduced)
     pwgen.loadWords(args.wordlist, args.min_word_len, args.max_word_len)
